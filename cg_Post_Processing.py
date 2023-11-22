@@ -31,7 +31,7 @@ e_R = 100000
 
 for i in range(1, last_frame):
     # import current Contact_Results_Job19 file
-    df_current_step = pd.read_csv(directory_path + '\Contact_Results_Job19_LP_' + str(i) + '.csv')
+    df_current_step = pd.read_csv(directory_path + '\Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv')
     # remove spaces from the header
     df_current_step.columns = df_current_step.columns.str.lstrip()
     # convert string to float for the CSLIP variable
@@ -64,10 +64,10 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\Wear_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
 
     else:
-        df_previous_step = pd.read_csv(directory_path + '\\Wear_Contact_Results_Job19_LP_' + str(i - 1) + '.csv')
+        df_previous_step = pd.read_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i - 1) + '.csv')
         df_current_step['DELTA_CSLIP'] = df_current_step['CSLIP'] - df_previous_step['CSLIP']
         df_current_step['DELTA_CNORMF-Magnitude'] = (df_current_step['CNORMF-Magnitude'] + df_previous_step['CNORMF-Magnitude']) / 2
 
@@ -83,7 +83,7 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_previous_step['Cumulative-Archard-Wear'] + df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_previous_step['Cumulative-Fleischer-Wear'] + df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\Wear_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
 
     if i == last_frame-1:
 

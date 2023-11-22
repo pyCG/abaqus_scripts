@@ -10,6 +10,7 @@ list_max_wear_fleischer = []
 list_relative_displacement = []
 list_normal_force = []
 list_load_duration = []
+list_load_change = []
 number_load_steps = 1001
 
 df = pd.read_csv(f'{directory_folder}\RescueHoist_Wear_Job19_LP_1000.csv')
@@ -42,11 +43,18 @@ for j in range(0, number_load_steps-1):
     if j == 0:
         load_duration = df_rescue_hoist['Time'].iloc[j]
         list_load_duration.append(load_duration/3600)
+
+        load_change  = df_rescue_hoist['R'].iloc[j]
+        list_load_change.append(abs(load_change))
+
     else:
         load_duration = df_rescue_hoist['Time'].iloc[j] - df_rescue_hoist['Time'].iloc[j-1]
         list_load_duration.append(load_duration / 3600)
 
+        load_change = df_rescue_hoist['R'].iloc[j] - df_rescue_hoist['R'].iloc[j-1]
+        list_load_change.append(abs(load_change))
 
+df_rescue_hoist['R Change'] = list_load_change
 df_rescue_hoist['Load Duration'] = list_load_duration
 
 df_rescue_hoist.to_csv('Baseline/RescueHoist_Baseline.csv', index=False)

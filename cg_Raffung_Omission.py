@@ -9,13 +9,15 @@ k = 0.0001
 H = 120
 mu = 0.2
 e_R = 100000
-thresholds = [1, 2, 5, 6, 7, 8, 9, 10, 15, 20]
+thresholds = [1, 2, 5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20]
 
 print('OMISSION OF SMALL LOAD CHANGE AMPLITUDES')
 print('==================================================================================')
 for threshold in thresholds:
-    df_omission = df_baseline[df_baseline['R'] >= df_baseline['R'].max() * (threshold/100)]
-
+    #df_omission = df_baseline[df_baseline['R'] >= df_baseline['R'].max() * (threshold/100)]
+    df_omission = df_baseline[df_baseline['R Change'] >= df_baseline['R Change'].max() * (threshold / 100)]
+    min_force = df_baseline['R Change'].max() * (threshold / 100)
+    print(f' Threshold Change of Force: {min_force:.2f} N')
     list_omission_archard = []
     list_omission_fleischer = []
 
@@ -72,12 +74,13 @@ for threshold in thresholds:
     reduced_time = total_time_baseline - total_time_omission
 
     if wear_difference_archard <= permissible_wear_difference_percentage:
-        print('----------------------------------------------------------------------------------')
+
         print(f' VALID | Wear Difference: {wear_difference_archard:.2f}% < 10% | Reduced Time: {reduced_time:.2f}h | Threshold: {threshold}% |  ')
-    else:
         print('----------------------------------------------------------------------------------')
+    else:
+
         print(f' INVALID | Wear Difference: {wear_difference_archard:.2f}% < 10% | Reduced Time: {reduced_time:.2f}h | Threshold: {threshold}% | ')
+        print('----------------------------------------------------------------------------------')
 
 
 ##
-

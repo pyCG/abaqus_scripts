@@ -19,7 +19,7 @@ execute_stress_disp_contact_plot = True
 execute_plot_archard_wear = True
 execute_plot_fleischer_wear = True
 
-directory_path = 'D:\MoVerHu_Projekt\FE_Modell\FE-Abaqus-Model\FE-Scripts\FE-Outputs'
+directory_path = 'RescueHoist'
 last_frame = 1001  # Set this to the last frame number
 k = 0.0001
 H = 120
@@ -31,7 +31,7 @@ e_R = 100000
 
 for i in range(1, last_frame):
     # import current Contact_Results_Job19 file
-    df_current_step = pd.read_csv(directory_path + '\Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv')
+    df_current_step = pd.read_csv(directory_path + '\RescueHoist_Abaqus_Job19_LP_' + str(i) + '.csv')
     # remove spaces from the header
     df_current_step.columns = df_current_step.columns.str.lstrip()
     # convert string to float for the CSLIP variable
@@ -64,10 +64,10 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i) + '.csv', index=False)
 
     else:
-        df_previous_step = pd.read_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i - 1) + '.csv')
+        df_previous_step = pd.read_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i - 1) + '.csv')
         df_current_step['DELTA_CSLIP'] = df_current_step['CSLIP'] - df_previous_step['CSLIP']
         df_current_step['DELTA_CNORMF-Magnitude'] = (df_current_step['CNORMF-Magnitude'] + df_previous_step['CNORMF-Magnitude']) / 2
 
@@ -83,7 +83,7 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_previous_step['Cumulative-Archard-Wear'] + df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_previous_step['Cumulative-Fleischer-Wear'] + df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\Calculated_Wear_Elements_Contact_Results_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i) + '.csv', index=False)
 
     if i == last_frame-1:
 
@@ -92,15 +92,16 @@ for i in range(1, last_frame):
         z = df_current_step['Z']
 
         if execute_stress_disp_contact_plot == True:
-            labels = ['CNORMF-Magnitude', 'CSLIP', 'Cumulative-Fleischer-Wear', 'Cumulative-Archard-Wear']
+            titles = ['CNORMF-Magnitude [N]', 'CSLIP [mm]', 'Cumulative-Fleischer-Wear [mm]', 'Cumulative-Archard-Wear [mm]']
 
-            for label in labels:
+            for title in titles:
                 plot_node_values(w=df_current_step[label],
                                  x=z,
                                  y=y,
                                  z=x,
                                  title=label,
-                                 save_path=directory_path,
+                                 save_path='Plot_Results',
+                                 file_name='RescueHoist',
                                  show_plot=True)
 
 ##

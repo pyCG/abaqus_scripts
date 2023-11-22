@@ -64,6 +64,7 @@ def plot_node_values(w: list,
                      z: list,
                      title: str,
                      save_path: str,
+                     file_name: str,
                      show_plot: bool
                      ):
     '''
@@ -90,13 +91,13 @@ def plot_node_values(w: list,
     cbar.ax.tick_params(labelsize=15)
     cbar.set_label(title, fontsize=15)
     # Set axis labels
-    ax.set_xlabel('x - Coordinates', fontsize=15)
-    ax.set_ylabel('y - Coordinates', fontsize=15)
-    ax.set_zlabel('z - Coordinates', fontsize=15)
+    ax.set_xlabel('x - Coordinates [mm]', fontsize=15)
+    ax.set_ylabel('y - Coordinates [mm]', fontsize=15)
+    ax.set_zlabel('z - Coordinates [mm]', fontsize=15)
 
     # plt.tight_layout()
 
-    plt.savefig(save_path + '\FE_img_Output_' + title + '.png', dpi=600)
+    plt.savefig(save_path + '\\' + file_name + '_' + title + '.png', dpi=600)
 
     if show_plot == True:
         plt.show()

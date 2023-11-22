@@ -30,8 +30,9 @@ e_R = 100000
 # =============================================================================
 
 for i in range(1, last_frame):
+    print(f'-- Load Step: {i}')
     # import current Contact_Results_Job19 file
-    df_current_step = pd.read_csv(directory_path + '\RescueHoist_Abaqus_Job19_LP_' + str(i) + '.csv')
+    df_current_step = pd.read_csv(f'{directory_path}/RescueHoist_Abaqus_Job19_LP_{i}.csv')
     # remove spaces from the header
     df_current_step.columns = df_current_step.columns.str.lstrip()
     # convert string to float for the CSLIP variable
@@ -46,7 +47,7 @@ for i in range(1, last_frame):
     # define sticking and sliping as contact stablished
     df_current_step.loc[df_current_step['CSTATUS'] == 2, 'CSTATUS'] = 1
     # calculate absolute relative displacement CSLIP
-    df_current_step['CSLIP'] = (np.sqrt(df_current_step['CSLIP1'] ** 2 + df_current_step['CSLIP2'] ** 2)) #* df_current_step['CSTATUS']
+    df_current_step['CSLIP'] = (np.sqrt(df_current_step['CSLIP1'] ** 2 + df_current_step['CSLIP2'] ** 2))
 
     if i == 1:
         df_current_step['DELTA_CSLIP'] = df_current_step['CSLIP']
@@ -64,10 +65,10 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(f'{directory_path}/RescueHoist_Wear_Job19_LP_{i}.csv', index=False)
 
     else:
-        df_previous_step = pd.read_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i - 1) + '.csv')
+        df_previous_step = pd.read_csv(f'{directory_path}/RescueHoist_Wear_Job19_LP_{i-1}.csv')
         df_current_step['DELTA_CSLIP'] = df_current_step['CSLIP'] - df_previous_step['CSLIP']
         df_current_step['DELTA_CNORMF-Magnitude'] = (df_current_step['CNORMF-Magnitude'] + df_previous_step['CNORMF-Magnitude']) / 2
 
@@ -83,23 +84,24 @@ for i in range(1, last_frame):
 
         df_current_step['Cumulative-Archard-Wear'] = df_previous_step['Cumulative-Archard-Wear'] + df_current_step['Archard-Wear']
         df_current_step['Cumulative-Fleischer-Wear'] = df_previous_step['Cumulative-Fleischer-Wear'] + df_current_step['Fleischer-Wear']
-        df_current_step.to_csv(directory_path + '\\RescueHoist_Wear_Job19_LP_' + str(i) + '.csv', index=False)
+        df_current_step.to_csv(f'{directory_path}/RescueHoist_Wear_Job19_LP_{i}.csv', index=False)
 
-    if i == last_frame-1:
+    if i == last_frame - 1:
 
         x = df_current_step['X']
         y = df_current_step['Y']
         z = df_current_step['Z']
 
         if execute_stress_disp_contact_plot == True:
-            titles = ['CNORMF-Magnitude [N]', 'CSLIP [mm]', 'Cumulative-Fleischer-Wear [mm]', 'Cumulative-Archard-Wear [mm]']
+            titles = ['CNORMF-Magnitude', 'CSLIP', 'Cumulative-Fleischer-Wear',
+                      'Cumulative-Archard-Wear']
 
             for title in titles:
-                plot_node_values(w=df_current_step[label],
+                plot_node_values(w=df_current_step[title],
                                  x=z,
                                  y=y,
                                  z=x,
-                                 title=label,
+                                 title=title,
                                  save_path='Plot_Results',
                                  file_name='RescueHoist',
                                  show_plot=True)

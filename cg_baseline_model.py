@@ -49,7 +49,7 @@ df_rescue_hoist['Baseline Cumulative Max Fleischer Wear'] = df_rescue_hoist['Bas
 df_rescue_hoist.to_csv('D:\MoVerHu_Projekt\FE_Modell\FE-Abaqus-Model\FE-Scripts\FE-Outputs\Rescue_Hoist_Wear_Verteilt.csv')
 df_rescue_hoist.to_excel('D:\MoVerHu_Projekt\FE_Modell\FE-Abaqus-Model\FE-Scripts\FE-Outputs\Rescue_Hoist_Wear_Verteilt.xlsx')
 
-
+#####TEST
 
 
 

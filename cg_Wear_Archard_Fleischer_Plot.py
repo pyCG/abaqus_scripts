@@ -9,7 +9,7 @@ def ARCHARD_wear_model(p_A: list,
                        s: list,
                        k: float,
                        H: float,
-                       ):
+                       ) -> object:
     '''
     Verschleißberechnung nach Archard
 

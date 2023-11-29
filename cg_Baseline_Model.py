@@ -36,8 +36,6 @@ df_rescue_hoist['Baseline CNORMF_Magnitude'] = list_normal_force
 
 df_rescue_hoist['Baseline Max Archard Wear'] = list_max_wear_archard
 df_rescue_hoist['Baseline Max Fleischer Wear'] = list_max_wear_fleischer
-df_rescue_hoist['Baseline Cumulative Max Archard Wear'] = df_rescue_hoist['Baseline Max Archard Wear'].cumsum()
-df_rescue_hoist['Baseline Cumulative Max Fleischer Wear'] = df_rescue_hoist['Baseline Max Fleischer Wear'].cumsum()
 
 for j in range(0, number_load_steps-1):
     if j == 0:

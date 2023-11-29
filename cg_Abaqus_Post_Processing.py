@@ -47,7 +47,7 @@ for i in range(1, last_frame):
     # define sticking and sliping as contact stablished
     df_current_step.loc[df_current_step['CSTATUS'] == 2, 'CSTATUS'] = 1
     # calculate absolute relative displacement CSLIP
-    df_current_step['CSLIP'] = (np.sqrt(df_current_step['CSLIP1'] ** 2 + df_current_step['CSLIP2'] ** 2))
+    df_current_step['CSLIP'] = (df_current_step['CSLIP1'])
 
     if i == 1:
         df_current_step['DELTA_CSLIP'] = df_current_step['CSLIP']
@@ -102,7 +102,7 @@ for i in range(1, last_frame):
                                  y=y,
                                  z=x,
                                  title=title,
-                                 save_path='Plot_Results',
+                                 save_path='PlotResults',
                                  file_name='RescueHoist',
                                  show_plot=True)
 

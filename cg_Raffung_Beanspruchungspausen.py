@@ -18,5 +18,4 @@ voelligkeit_test_duration = df_voelligkeit['Load Duration'].cumsum().max()
 pausen_test_duration = df_pausen['Load Duration'].cumsum().max()
 
 print('----------------------------------------------------------------------------------')
-    print(
-        f' | Baseline Duration: {baseline_test_duration:.1f}h | Omission Duration: {omission_test_duration:.1f}h | Voelligkeit Duration: {voelligkeit_test_duration:.1f}h | Beanspruchungspausen Duration: {pausen_test_duration:.1f}h |')
+print(f' | Baseline Duration: {baseline_test_duration:.1f}h | Omission Duration: {omission_test_duration:.1f}h | Voelligkeit Duration: {voelligkeit_test_duration:.1f}h | Beanspruchungspausen Duration: {pausen_test_duration:.1f}h |')

@@ -93,8 +93,7 @@ for i in range(1, last_frame):
         z = df_current_step['Z']
 
         if execute_stress_disp_contact_plot == True:
-            titles = ['CNORMF-Magnitude', 'CSLIP', 'Cumulative-Fleischer-Wear',
-                      'Cumulative-Archard-Wear']
+            titles = ['CNORMF-Magnitude', 'CSLIP', 'Cumulative-Fleischer-Wear', 'Cumulative-Archard-Wear']
 
             for title in titles:
                 plot_node_values(w=df_current_step[title],

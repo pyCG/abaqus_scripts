@@ -84,12 +84,20 @@ def plot_node_values(w: list,
     # Create a 3D plot
     fig = plt.figure(figsize=(16, 16))
     ax = fig.add_subplot(111, projection='3d')
-    sc = ax.scatter(x, y, z, c=w, cmap='jet')
+    sc = ax.scatter(x, y, z, c=w*1000, cmap='jet')
     ax.set_aspect('equal', 'box')
     # Add colorbar and set label
     cbar = fig.colorbar(sc, pad=0.12)
     cbar.ax.tick_params(labelsize=15)
-    cbar.set_label(title, fontsize=15)
+    titles = ['CNORMF-Magnitude', 'CSLIP', 'Cumulative-Fleischer-Wear', 'Cumulative-Archard-Wear']
+
+    if title == 'CNORMF-Magnitude':
+        cbar.set_label(title + ' [N]', fontsize=15)
+    if title == 'CSLIP':
+        cbar.set_label(title + ' [mm]', fontsize=15)
+    if title == 'Cumulative-Fleischer-Wear' or title == 'Cumulative-Archard-Wear':
+        cbar.set_label(title + ' [µm]', fontsize=15)
+
     # Set axis labels
     ax.set_xlabel('x - Coordinates [mm]', fontsize=15)
     ax.set_ylabel('y - Coordinates [mm]', fontsize=15)

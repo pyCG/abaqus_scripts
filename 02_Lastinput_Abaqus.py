@@ -34,9 +34,9 @@ from sketch import *
 from visualization import *
 from connectorBehavior import *
 
-csv_file_path = 'D:\MoVerHu_Projekt\FE_Modell\FE-Abaqus-Model\FE-Scripts\FE-Inputs\Rescue_Hoist_verteilt.csv'
+csv_file_path = r'C:\Users\carlos.cruz\PycharmProjects\abaqus_scripts\Lasten\Multipurpose_verteilt.csv'
 i = 0
-model = 'Model-19'
+model = 'Model-20'
 with open(csv_file_path, 'r') as file:
     # Create a CSV reader object
     csv_reader = csv.reader(file)

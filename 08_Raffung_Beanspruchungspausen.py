@@ -19,3 +19,10 @@ pausen_test_duration = df_pausen['Load Duration'].cumsum().max()
 
 print('----------------------------------------------------------------------------------')
 print(f' | Baseline Duration: {baseline_test_duration:.1f}h | Omission Duration: {omission_test_duration:.1f}h | Voelligkeit Duration: {voelligkeit_test_duration:.1f}h | Beanspruchungspausen Duration: {pausen_test_duration:.1f}h |')
+
+df_gerafftet_lastkollektiv = pd.DataFrame()
+df_gerafftet_lastkollektiv['Time'] = df_pausen['Load Duration'].cumsum()
+df_gerafftet_lastkollektiv['Time'] = df_gerafftet_lastkollektiv['Time']*3600
+df_gerafftet_lastkollektiv = pd.concat([df_gerafftet_lastkollektiv['Time'], df_pausen[['MT1', 'MT2', 'MQF', 'FROX', 'FROY', 'FROZ', 'MROX', 'MROY', 'MROZ']]], axis=1)
+df_gerafftet_lastkollektiv.to_csv('GeraffteLastkollektive/RescueHoist_geraffter_Kollektiv.csv', index=False)
+df_gerafftet_lastkollektiv.to_excel('GeraffteLastkollektive/RescueHoist_geraffter_Kollektiv.xlsx', index=False)

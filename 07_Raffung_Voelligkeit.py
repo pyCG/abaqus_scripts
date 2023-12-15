@@ -90,7 +90,7 @@ while wear_difference_fleischer <= 0:
 
     print('----------------------------------------------------------------------------------')
     print(
-        f' {counter} | Wear difference: {wear_difference_fleischer:.2f} % | Omission: {wear_omission_fleischer:.6f} | Voelligkeit: {wear_voelligkeit_fleischer:.6f} | Omission Duration: {omission_test_duration:.1f}h | Voelligkeit Duration: {voelligkeit_test_duration:.1f}h | ')
+        f' {counter} | Wear difference: {wear_difference_fleischer:.2f} % | Wear Omission: {wear_omission_fleischer:.6f} | Wear Voelligkeit: {wear_voelligkeit_fleischer:.6f} | Omission Duration: {omission_test_duration:.1f}h | Voelligkeit Duration: {voelligkeit_test_duration:.1f}h | ')
 del df_voelligkeit['Baseline Max Archard Wear']
 del df_voelligkeit['Baseline Max Fleischer Wear']
 del df_voelligkeit['Omission Max Archard Wear']
@@ -103,3 +103,11 @@ df_voelligkeit['Voelligkeit Max Fleischer Wear'] = list_voelligkeit_fleischer
 df_voelligkeit.to_csv('Voelligkeit/RescueHoist_Voelligkeit.csv', index=False)
 df_voelligkeit.to_excel('Voelligkeit/RescueHoist_Voelligkeit.xlsx', index=False)
 
+df_gerafftet_lastkollektiv = pd.DataFrame()
+df_gerafftet_lastkollektiv['Time'] = df_voelligkeit['Load Duration'].cumsum()
+df_gerafftet_lastkollektiv['Time'] = df_gerafftet_lastkollektiv['Time']*3600
+df_gerafftet_lastkollektiv = pd.concat([df_gerafftet_lastkollektiv['Time'], df_voelligkeit[['MT1', 'MT2', 'MQF', 'FROX', 'FROY', 'FROZ', 'MROX', 'MROY', 'MROZ']]], axis=1)
+df_gerafftet_lastkollektiv.to_csv('GeraffteLastkollektive/RescueHoist_gerafftes_Kollektiv_Voelligkeit.csv', index=False)
+df_gerafftet_lastkollektiv.to_excel('GeraffteLastkollektive/RescueHoist_gerafftes_Kollektiv_Voelligkeit.xlsx', index=False)
+
+df_gerafftet_lastkollektiv['Time'].max()

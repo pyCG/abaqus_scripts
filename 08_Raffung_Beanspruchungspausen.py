@@ -24,5 +24,5 @@ df_gerafftet_lastkollektiv = pd.DataFrame()
 df_gerafftet_lastkollektiv['Time'] = df_pausen['Load Duration'].cumsum()
 df_gerafftet_lastkollektiv['Time'] = df_gerafftet_lastkollektiv['Time']*3600
 df_gerafftet_lastkollektiv = pd.concat([df_gerafftet_lastkollektiv['Time'], df_pausen[['MT1', 'MT2', 'MQF', 'FROX', 'FROY', 'FROZ', 'MROX', 'MROY', 'MROZ']]], axis=1)
-df_gerafftet_lastkollektiv.to_csv('GeraffteLastkollektive/RescueHoist_geraffter_Kollektiv.csv', index=False)
-df_gerafftet_lastkollektiv.to_excel('GeraffteLastkollektive/RescueHoist_geraffter_Kollektiv.xlsx', index=False)
+df_gerafftet_lastkollektiv.to_csv('GeraffteLastkollektive/RescueHoist_gerafftes_Kollektiv_Beanspruchungspausen.csv', index=False)
+df_gerafftet_lastkollektiv.to_excel('GeraffteLastkollektive/RescueHoist_gerafftes_Kollektiv_Beanspruchungspausen.xlsx', index=False)

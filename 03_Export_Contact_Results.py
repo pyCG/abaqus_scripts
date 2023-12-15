@@ -98,7 +98,7 @@ number_of_steps = len(odb.steps)
 print(number_of_steps)
 for i in range(0, number_of_steps):
     session.writeFieldReport(
-        fileName=directory_path + '/FE-Scripts/FE-Outputs/RescueHoist_Abaqus_Job19_LP_' + str(i+1) + '.csv',
+        fileName=directory_path + '/FE-Scripts/FE-Outputs/RescueHoist_Abaqus_Job19_LP_' + str(i+1) + '_Full_Ring.csv',
         append=OFF, sortItem='Node Label', odb=odb, step=i, frame=6,
         outputPosition=ELEMENT_NODAL, variable=(
         ('CNORMF', ELEMENT_NODAL), ('CSLIP1', ELEMENT_NODAL), ('CSLIP2', ELEMENT_NODAL), ('CSTATUS', ELEMENT_NODAL)),

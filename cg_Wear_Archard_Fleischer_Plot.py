@@ -105,7 +105,7 @@ def plot_node_values(w: list,
 
     # plt.tight_layout()
 
-    plt.savefig(save_path + '\\' + file_name + '_' + title + '.png', dpi=600)
+    plt.savefig(save_path + '\\' + file_name + '_' + title + 'Full_Ring.png', dpi=600)
 
     if show_plot == True:
         plt.show()

@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 header = ['Fy','Fz','Time','MT1','MT2','MQF','FROX','FROY','FROZ','MROX','MROY','MROZ']
-df = pd.read_csv('Lasten/Multipurpose_Forces_unverteilt.csv', header=None, names=header)
+df = pd.read_csv('Lasten/Rescue_Hoist_Forces_unverteilt.csv', header=None, names=header)
 
 area = 2714.336/16 # mm2
 

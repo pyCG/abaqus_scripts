@@ -1,4 +1,4 @@
-
+'''
 import csv
 def select_column(csv_file, column_name):
         with open(csv_file, 'r') as file:
@@ -18,7 +18,7 @@ for i in range(0, len(kraft_name)):
 
 
 #%%
-
+'''
 import csv
 from part import *
 from material import *
@@ -34,7 +34,7 @@ from sketch import *
 from visualization import *
 from connectorBehavior import *
 
-csv_file_path = r'C:\Users\carlos.cruz\PycharmProjects\abaqus_scripts\Lasten\Multipurpose_verteilt.csv'
+csv_file_path = r'/Lasten/Multipurpose_verteilt.csv'
 i = 0
 model = 'Model-20'
 with open(csv_file_path, 'r') as file:
@@ -61,35 +61,18 @@ with open(csv_file_path, 'r') as file:
 
 #%%
 
-'''
+
 ## Create the Steps
+'''   
 for i in range(1, 1000):
     mdb.models['Model-13'].StaticStep(initialInc=0.0001, minInc=1e-15, name='Step-'+str(i+1), previous='Step-'+str(i))
-'''    
+ 
 for i in range(1, 1001):
     mdb.models['Model-14'].steps['Step-'+str(i)].setValues(adaptiveDampingRatio=0.05, continueDampingFactors=False, stabilizationMagnitude=0.0002, stabilizationMethod=DISSIPATED_ENERGY_FRACTION)
 
+'''
 
 
-from part import *
-from material import *
-from section import *
-from assembly import *
-from step import *
-from interaction import *
-from load import *
-from mesh import *
-from optimization import *
-from job import *
-from sketch import *
-from visualization import *
-from connectorBehavior import *
-for i in range(1, 1000):
-    mdb.models['Model-19'].StaticStep(adaptiveDampingRatio=None, 
-        continueDampingFactors=False, initialInc=0.1, matrixSolver=DIRECT, 
-        matrixStorage=UNSYMMETRIC, minInc=1e-15, name='Step-'+str(i+1), previous='Step-'+str(i), 
-        stabilizationMagnitude=0.0002, stabilizationMethod=
-        DAMPING_FACTOR)
 
 
 # mdb.models['Model-18'].StaticStep(adaptiveDampingRatio=None, 

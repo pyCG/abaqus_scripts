@@ -2,12 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 from scipy.optimize import curve_fit
+import os
 import numpy as np
 
-def plot_and_save(reference_filename, compare_filename, save_filename):
-    df_referenz = pd.read_csv('KonturVermessung/' + reference_filename, skiprows=2, sep=r'\t', header=None,
+def plot_and_save(reference_filename, compare_filename, save_filename, folder_path, folder_path_ref):
+    df_referenz = pd.read_csv(folder_path_ref + '/' + reference_filename, skiprows=2, sep=r'\t', header=None,
                               engine='python')
-    df_vermessung = pd.read_csv('KonturVermessung/' + compare_filename, skiprows=2, sep=r'\t', header=None,
+    df_vermessung = pd.read_csv(folder_path + '/' + compare_filename, skiprows=2, sep=r'\t', header=None,
                                 engine='python')
     x_ref = df_referenz[0]
     y_ref = df_referenz[1]
@@ -38,6 +39,8 @@ def plot_and_save(reference_filename, compare_filename, save_filename):
 
     # Calculate wear
     y_wear = (y_ref - y_cmp) * 10 ** 3
+    print(y_ref.max())
+    print(y_cmp.max())
 
     # define the true objective function
     def objective(x, a, b, c, d, e, f):
@@ -98,10 +101,20 @@ def plot_and_save(reference_filename, compare_filename, save_filename):
 
 
 
+def count_txt_files(folder_path):
+    txt_count = 0
+    for file in os.listdir(folder_path):
+        if file.endswith('.txt'):
+            txt_count += 1
+    return txt_count
+folder_path_ref = '5GradMessung(erste)'
+folder_path = '30GradMessungen'
+txt_file_count = count_txt_files(folder_path)
+
 # Vergleiche Messung01 mit den ersten 64 Messungen
-for i in range(1, 65):
+for i in range(1, txt_file_count+1):
     reference_filename = "Messung02.txt"
-    compare_filename = f"Messung{i:02}.txt"
+    compare_filename = f"Messung30-{i}.txt"
     print(compare_filename)
-    save_filename = f"WearResults/Kontur_Vergleich_Messung01_{compare_filename[:-4]}.png"
-    plot_and_save(reference_filename, compare_filename, save_filename)
+    save_filename = f"WearResults - 30 Grad/Kontur_Vergleich_Messung01_{compare_filename[:-4]}.png"
+    plot_and_save(reference_filename, compare_filename, save_filename, folder_path,folder_path_ref)
